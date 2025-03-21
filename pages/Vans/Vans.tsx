@@ -12,7 +12,7 @@ interface Van {
   type: string;
 }
 
-export default function Vans(): JSX.Element {
+export default function Vans(): React.ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = useState<Van[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

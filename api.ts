@@ -55,13 +55,28 @@ const db = getFirestore(app);
 const usersCollectionRef = collection(db, "users");
 const vansCollectionRef = collection(db, "vans");
 
-export async function getVans(): Promise<Van[]> {
-  const snapshot = await getDocs(vansCollectionRef);
-  const vans = snapshot.docs.map(doc => ({
-    ...doc.data(),
-    id: doc.id
-  })) as Van[];
-  return vans;
+export async function getVans(id?: string): Promise<Van | Van[]> {
+  try {
+    const url = id ? `/api/vans/${id}` : '/api/vans';
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('Van not found');
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Server returned non-JSON response');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('API Error:', error);
+    throw error;
+  }
 }
 
 export async function getVan(id: string): Promise<Van | null> {

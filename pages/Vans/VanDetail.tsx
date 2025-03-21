@@ -18,7 +18,7 @@ interface LocationState {
   type?: string;
 }
 
-export default function VanDetail(): JSX.Element {
+export default function VanDetail(): React.ReactElement {
   const [van, setVan] = useState<Van | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -30,18 +30,19 @@ export default function VanDetail(): JSX.Element {
     async function loadVans() {
       setLoading(true);
       try {
+        if (!id) throw new Error('No van ID provided');
         const data = await getVans(id);
-        setVan(data);
+        const van = Array.isArray(data) ? data.find(v => v.id === id) || null : data;
+        if (!van) throw new Error('Van not found');
+        setVan(van);
       } catch (err) {
-        setError(err as Error);
+        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       } finally {
         setLoading(false);
       }
     }
     
-    if (id) {
-      loadVans();
-    }
+    loadVans();
   }, [id]);
   
   if (loading) {

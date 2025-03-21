@@ -17,7 +17,7 @@ interface OutletContextType {
 }
 
 const HostVanDetail: React.FC = () => {
-  const [currentVan, setCurrentVan] = useState<Van | null>(null);
+  const [currentVan, setCurrentVan] = useState<Van| null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const { id } = useParams<{ id: string }>();
@@ -27,7 +27,8 @@ const HostVanDetail: React.FC = () => {
       setLoading(true);
       try {
         const data = await getHostVans(id);
-        setCurrentVan(data);
+        const van = Array.isArray(data) ? data.find(v => v.id === id) || null : data;
+        setCurrentVan(van);
       } catch (err) {
         setError(err as Error);
       } finally {
