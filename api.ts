@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { 
   getFirestore, 
@@ -12,7 +11,6 @@ import {
   Query
 } from "firebase/firestore";
 
-// Define types for our data
 export interface Van {
   id: string;
   name: string;
@@ -59,7 +57,7 @@ const db = getFirestore(app);
 const usersCollectionRef = collection(db, "users");
 const vansCollectionRef = collection(db, "vans");
 
-export async function getVans(filter?: string): Promise<Van[]> {  // Remove id parameter if not used
+export async function getVans(filter?: string): Promise<Van[]> {  
   try {
     let q: Query<DocumentData> = vansCollectionRef;
     if (filter) {
@@ -92,7 +90,6 @@ export async function getVan(id: string): Promise<Van | null> {
 
 export async function getHostVans(hostId?: string): Promise<Van[]> {
   try {
-    // Create the query
     const q = query(
       vansCollectionRef,
       where("hostId", "==", hostId || "123")
@@ -100,8 +97,7 @@ export async function getHostVans(hostId?: string): Promise<Van[]> {
     
     console.log('Fetching vans for hostId:', hostId || "123");
     
-    // Use the query (q) instead of vansCollectionRef directly
-    const querySnapshot = await getDocs(q); // This line was incorrect before
+    const querySnapshot = await getDocs(q); 
     
     console.log('Found vans:', querySnapshot.size);
     
@@ -115,12 +111,11 @@ export async function getHostVans(hostId?: string): Promise<Van[]> {
     
   } catch (error) {
     console.error('Error in getHostVans:', error);
-    throw error; // It's better to throw the error than return empty array
+    throw error; 
   }
 }
 
 export async function loginUser(creds: LoginCredentials): Promise<LoginResponse> {
-  // Development-only test credentials check
   if (creds.email === "discovery@world.com" && creds.password === "12032001") {
     return {
       user: {

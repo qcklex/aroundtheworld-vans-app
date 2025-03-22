@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { getVans } from "../../api";
 
-// Define the Van interface
 interface Van {
   id: string;
   name: string;
@@ -12,7 +11,6 @@ interface Van {
   type: string;
 }
 
-// Define the location state interface
 interface LocationState {
   search?: string;
   type?: string;
@@ -56,7 +54,6 @@ export default function VanDetail(): React.ReactElement {
   const search = locationState?.search || "";
   const type = locationState?.type || "all";
   
-  // Function to get the appropriate background color for van type
   const getTypeColor = (type: string): string => {
     switch (type) {
       case "simple":
@@ -70,7 +67,6 @@ export default function VanDetail(): React.ReactElement {
     }
   };
   
-  // Function to get the appropriate text color for van type
   const getTypeTextColor = (type: string): string => {
     return type === "simple" ? "text-black" : "text-white";
   };

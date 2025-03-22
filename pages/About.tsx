@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Import type for the image if using TypeScript with assets
-// You would need to add a custom.d.ts file with proper type definitions
 import bgImg from "../assets/images/about-hero.png";
 
 const About: React.FC = () => {

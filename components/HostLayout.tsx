@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 export default function HostLayout() {
-  // Using Tailwind classes instead of inline styles
   const activeClassName = "font-bold underline text-gray-900";
   const inactiveClassName = "text-gray-600 hover:text-gray-800";
 

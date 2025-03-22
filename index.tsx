@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 
-// Page imports
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Vans from "./pages/Vans/Vans";
@@ -19,7 +18,6 @@ import HostVanPricing from "./pages/Host/HostVanPricing";
 import HostVanPhotos from "./pages/Host/HostVanPhotos";
 import NotFound from "./pages/NotFound";
 
-// Component imports
 import Layout from "./components/Layout";
 import HostLayout from "./components/HostLayout";
 import AuthRequired from "./components/AuthRequired";

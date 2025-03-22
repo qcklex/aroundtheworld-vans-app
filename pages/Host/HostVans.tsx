@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getHostVans } from "../../api";
 
-// Define TypeScript interfaces
 export interface Van {
   id: string;
   name: string;

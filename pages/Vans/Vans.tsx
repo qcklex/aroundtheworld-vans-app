@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
 
-// Define the Van interface
 interface Van {
   id: string;
   name: string;
@@ -41,7 +40,6 @@ export default function Vans(): React.ReactElement {
     ? vans.filter(van => van.type === typeFilter)
     : vans;
 
-  // Function to get the appropriate background color for van type
   const getTypeColor = (type: string): string => {
     switch (type) {
       case "simple":
@@ -55,12 +53,10 @@ export default function Vans(): React.ReactElement {
     }
   };
   
-  // Function to get the appropriate text color for van type
   const getTypeTextColor = (type: string): string => {
     return type === "simple" ? "text-black" : "text-white";
   };
   
-  // Button class helper
   const getButtonClass = (type: string): string => {
     const baseClass = "px-4 py-2 rounded-md font-medium mr-2 mb-2";
     const activeClass = "ring-2 ring-offset-2";
