@@ -28,6 +28,7 @@ export default function Vans(): React.ReactElement {
         setVans(data);
       } catch (err) {
         setError(err as Error);
+  
       } finally {
         setLoading(false);
       }
@@ -56,7 +57,7 @@ export default function Vans(): React.ReactElement {
   
   // Function to get the appropriate text color for van type
   const getTypeTextColor = (type: string): string => {
-    return type === "luxury" ? "text-white" : "text-black";
+    return type === "simple" ? "text-black" : "text-white";
   };
   
   // Button class helper

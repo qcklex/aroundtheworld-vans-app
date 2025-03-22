@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NotFound: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-4 py-16 text-center">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-4 py-16 text-center font-sans">
       <h1 className="text-3xl font-bold mb-8">Sorry, the page you were looking for was not found.</h1>
       <Link 
         to="/" 

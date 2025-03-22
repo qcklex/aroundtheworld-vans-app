@@ -1,22 +1,10 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
+import {Van, HostVanContext} from  "./HostVans";
 
-// Define TypeScript interfaces
-interface Van {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  description: string;
-}
-
-interface ContextType {
-  currentVan: Van;
-}
 
 const HostVanPhotos: React.FC = () => {
-  const { currentVan } = useOutletContext<ContextType>();
+  const { currentVan } = useOutletContext<HostVanContext>();
   
   return (
     <img 

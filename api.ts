@@ -5,7 +5,11 @@ import {
   collection, 
   getDocs, 
   doc, 
-  getDoc 
+  getDoc,
+  query,
+  where,
+  DocumentData,
+  Query
 } from "firebase/firestore";
 
 // Define types for our data
@@ -16,7 +20,7 @@ export interface Van {
   description: string;
   imageUrl: string;
   type: string;
-  hostId?: string;
+  hostId?: string;  
 }
 
 export interface LoginCredentials {
@@ -55,27 +59,20 @@ const db = getFirestore(app);
 const usersCollectionRef = collection(db, "users");
 const vansCollectionRef = collection(db, "vans");
 
-export async function getVans(id?: string): Promise<Van | Van[]> {
+export async function getVans(filter?: string): Promise<Van[]> {  // Remove id parameter if not used
   try {
-    const url = id ? `/api/vans/${id}` : '/api/vans';
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      if (response.status === 404) {
-        throw new Error('Van not found');
-      }
-      throw new Error(`HTTP error! status: ${response.status}`);
+    let q: Query<DocumentData> = vansCollectionRef;
+    if (filter) {
+      q = query(vansCollectionRef, where("type", "==", filter));
     }
-    
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Server returned non-JSON response');
-    }
-    
-    return await response.json();
+    const querySnapshot = await getDocs(vansCollectionRef);
+    return querySnapshot.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    })) as Van[];
   } catch (error) {
-    console.error('API Error:', error);
-    throw error;
+    console.error('Error fetching vans:', error);
+    return [];
   }
 }
 
@@ -93,43 +90,59 @@ export async function getVan(id: string): Promise<Van | null> {
   } as Van;
 }
 
-export async function getHostVans(id?: string): Promise<Van[]> {
-  const url = id ? `/api/host/vans/${id}` : "/api/host/vans";
+export async function getHostVans(hostId?: string): Promise<Van[]> {
   try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw {
-        message: "Failed to fetch vans",
-        statusText: res.statusText,
-        status: res.status
-      } as ApiError;
-    }
-    const data = await res.json();
-    return data.vans as Van[];
+    // Always use a query to ensure consistent behavior
+    const q = query(
+      vansCollectionRef,
+      where("hostId", "==", hostId || "123") // Use mock ID if no hostId provided
+    );
+    
+    console.log('Fetching vans for hostId:', hostId || "123"); // Debug log
+    
+    const querySnapshot = await getDocs(q);
+    
+    console.log('Found vans:', querySnapshot.size); // Debug log
+    
+    const vans = querySnapshot.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    })) as Van[];
+    
+    console.log('Processed vans:', vans); // Debug log
+    return vans;
+    
   } catch (error) {
-    throw error;
+    console.error('Error in getHostVans:', error);
+    return [];
   }
 }
 
 export async function loginUser(creds: LoginCredentials): Promise<LoginResponse> {
-  try {
-    const res = await fetch("/api/login", {
-      method: "post",
-      body: JSON.stringify(creds)
-    });
-    
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw {
-        message: data.message,
-        statusText: res.statusText,
-        status: res.status
-      } as ApiError;
-    }
-
-    return data as LoginResponse;
-  } catch (error) {
-    throw error;
+  // Development-only test credentials check
+  if (creds.email === "discovery@world.com" && creds.password === "12032001") {
+    return {
+      user: {
+        id: "discovery123",
+        email: "discovery@world.com",
+        name: "Test User"
+      },
+      token: "mock-token-123"
+    };
   }
+
+  throw {
+    message: "Invalid credentials",
+    statusText: "UNAUTHORIZED",
+    status: 401
+  } as ApiError;
 }
+
+export function handleFirebaseError(error: any): ApiError {
+  return {
+    message: "Authentication bypassed",
+    statusText: "OK",
+    status: 200
+  };
+}
+

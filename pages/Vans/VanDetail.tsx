@@ -72,7 +72,7 @@ export default function VanDetail(): React.ReactElement {
   
   // Function to get the appropriate text color for van type
   const getTypeTextColor = (type: string): string => {
-    return type === "luxury" ? "text-white" : "text-black";
+    return type === "simple" ? "text-black" : "text-white";
   };
   
   return (

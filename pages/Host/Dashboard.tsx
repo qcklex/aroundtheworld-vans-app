@@ -28,7 +28,7 @@ const Dashboard: React.FC = () => {
 
   const renderVanElements = (vans: Van[]) => {
     const hostVansEls = vans.map((van) => (
-      <div className="flex bg-white p-4 rounded-lg shadow-sm" key={van.id}>
+      <div className="flex bg-white p-4 rounded-lg shadow-sm font-sans" key={van.id}>
         <img 
           src={van.imageUrl} 
           alt={`Photo of ${van.name}`} 
@@ -48,18 +48,18 @@ const Dashboard: React.FC = () => {
     ));
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 font-sans">
         <section>{hostVansEls}</section>
       </div>
     );
   };
 
   if (error) {
-    return <h1 className="text-red-600 text-xl font-bold">Error: {error.message}</h1>;
+    return <h1 className="text-red-600 text-xl font-sans font-bold">Error: {error.message}</h1>;
   }
 
   return (
-    <>
+    <div className="font-sans">
       <section className="bg-orange-100 p-6 rounded-lg mb-6 flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold mb-2">Welcome!</h1>
@@ -78,7 +78,9 @@ const Dashboard: React.FC = () => {
       <section className="bg-white p-6 rounded-lg mb-6 flex justify-between items-center">
         <div className="flex items-center">
           <h2 className="text-xl font-bold mr-4">Review score</h2>
-          <BsStarFill className="text-yellow-400 text-xl mr-2" />
+          <span className="text-yellow-400 text-xl mr-2">
+            <BsStarFill />
+          </span>
           <p className="text-gray-700">
             <span className="font-bold">5.0</span>/5
           </p>
@@ -106,7 +108,7 @@ const Dashboard: React.FC = () => {
           : renderVanElements(vans)
         }
       </section>
-    </>
+    </div>
   );
 };
 

@@ -8,7 +8,7 @@ export default function HostLayout() {
 
   return (
     <>
-      <nav className="flex px-8 py-4 bg-gray-50 gap-6">
+      <nav className="flex px-8 py-4 bg-gray-50 gap-6 font-sans">
         <NavLink
           to="."
           end

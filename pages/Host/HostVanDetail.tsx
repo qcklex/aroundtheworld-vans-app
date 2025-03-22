@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, NavLink, Outlet } from "react-router-dom";
+import { useParams, Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { getHostVans } from "../../api";
-
+import {Van, HostVanContext} from  "./HostVans";
 // Define TypeScript interfaces
-interface Van {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  description: string;
-}
 
-interface OutletContextType {
-  currentVan: Van;
-}
 
 const HostVanDetail: React.FC = () => {
   const [currentVan, setCurrentVan] = useState<Van| null>(null);
@@ -117,7 +106,7 @@ const HostVanDetail: React.FC = () => {
             </NavLink>
           </nav>
           <div className="p-6">
-            <Outlet context={{ currentVan } as OutletContextType} />
+            <Outlet context={{ currentVan } as HostVanContext} />
           </div>
         </div>
       )}

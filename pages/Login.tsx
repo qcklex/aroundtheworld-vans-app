@@ -24,6 +24,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const from = location.state?.from || "/host";
+  const message = location.state?.message;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,8 +51,9 @@ const Login: React.FC = () => {
     }));
   }
 
+
   return (
-    <div className="max-w-md mx-auto px-4 py-16">
+    <div className="max-w-md mx-auto px-4 py-16 font-sans">
       {location.state?.message && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {location.state.message}
@@ -60,13 +62,9 @@ const Login: React.FC = () => {
       
       <h1 className="text-3xl font-bold text-center mb-6">Sign in to your account</h1>
       
-      {error?.message && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {error.message}
-        </div>
-      )}
+  
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 font-sans">
         <input
           name="email"
           onChange={handleChange}

@@ -7,7 +7,7 @@ import bgImg from "../assets/images/about-hero.png";
 
 const About: React.FC = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 font-sans">
       <img 
         src={bgImg} 
         alt="Hero image of van life" 

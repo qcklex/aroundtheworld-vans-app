@@ -1,12 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-// Make sure to import your image according to your project structure
-// You might need to adjust this import path
-import imageUrl from "/assets/images/avatar-icon.png";
+import imageUrl from "../assets/images/avatar-icon.png";
 
 export default function Header() {
-  // Using Tailwind classes instead of inline styles
   const activeClassName = "font-bold underline text-gray-900";
   const inactiveClassName = "text-gray-600 hover:text-gray-800";
 
@@ -15,11 +12,11 @@ export default function Header() {
   }
 
   return (
-    <header className="flex justify-between items-center p-4 bg-white shadow-sm">
-      <Link className="text-xl font-bold text-gray-900" to="/">
-        #VanLife
+    <header className="flex justify-between items-center p-4 bg-white shadow-sm font-sans ">
+      <Link className="sm:text-3xl md:text-3xl  lg:text-4xl text-2xl text-gray-900 font-sans font-thin uppercase" to="/">
+        #AroundTheWorld
       </Link>
-      <nav className="flex items-center gap-6">
+      <nav className="flex items-center gap-2 font-sans">
         <NavLink
           to="/host"
           className={({ isActive }) => 
