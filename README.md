@@ -1,5 +1,6 @@
 # AroundTheWorld Vans App
 
+
 ## Development Testing
 
 To visit the app, use these credentials:
@@ -8,8 +9,6 @@ To visit the app, use these credentials:
 Email: discovery@world.com
 Password: 12032001
 ```
-
-⚠️ **WARNING**: These credentials are for development testing only and will be removed in production.
 
 ## Getting Started
 
