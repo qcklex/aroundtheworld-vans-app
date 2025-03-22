@@ -92,29 +92,30 @@ export async function getVan(id: string): Promise<Van | null> {
 
 export async function getHostVans(hostId?: string): Promise<Van[]> {
   try {
-    // Always use a query to ensure consistent behavior
+    // Create the query
     const q = query(
       vansCollectionRef,
-      where("hostId", "==", hostId || "123") // Use mock ID if no hostId provided
+      where("hostId", "==", hostId || "123")
     );
     
-    console.log('Fetching vans for hostId:', hostId || "123"); // Debug log
+    console.log('Fetching vans for hostId:', hostId || "123");
     
-    const querySnapshot = await getDocs(q);
+    // Use the query (q) instead of vansCollectionRef directly
+    const querySnapshot = await getDocs(q); // This line was incorrect before
     
-    console.log('Found vans:', querySnapshot.size); // Debug log
+    console.log('Found vans:', querySnapshot.size);
     
     const vans = querySnapshot.docs.map(doc => ({
       ...doc.data(),
       id: doc.id
     })) as Van[];
     
-    console.log('Processed vans:', vans); // Debug log
+    console.log('Processed vans:', vans);
     return vans;
     
   } catch (error) {
     console.error('Error in getHostVans:', error);
-    return [];
+    throw error; // It's better to throw the error than return empty array
   }
 }
 

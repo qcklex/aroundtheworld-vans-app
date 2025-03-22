@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
-import { getHostVans } from "../../api";
+import { getHostVans, getVan } from "../../api";
 import {Van, HostVanContext} from  "./HostVans";
 // Define TypeScript interfaces
 
 
 const HostVanDetail: React.FC = () => {
   const [currentVan, setCurrentVan] = useState<Van| null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
   const { id } = useParams<{ id: string }>();
 
@@ -15,7 +15,7 @@ const HostVanDetail: React.FC = () => {
     async function loadVans() {
       setLoading(true);
       try {
-        const data = await getHostVans(id);
+        const data = await getVan(id!);
         const van = Array.isArray(data) ? data.find(v => v.id === id) || null : data;
         setCurrentVan(van);
       } catch (err) {
@@ -57,7 +57,7 @@ const HostVanDetail: React.FC = () => {
             <img 
               src={currentVan.imageUrl} 
               alt={currentVan.name}
-              className="w-full md:w-64 h-56 md:h-auto object-cover rounded-md"  
+              className="w-64 h-automd:w-64 h-auto md:h-auto object-cover rounded-md"  
             />
             <div>
               <span 
@@ -78,7 +78,7 @@ const HostVanDetail: React.FC = () => {
               end
               className={({ isActive }) => 
                 `py-3 px-4 mr-4 font-medium ${isActive ? 
-                  "border-b-2 border-black font-bold" : 
+                  "focus: font-bold focus:underline " : 
                   "text-gray-600 hover:text-black"}`
               }
             >
@@ -88,7 +88,7 @@ const HostVanDetail: React.FC = () => {
               to="pricing"
               className={({ isActive }) => 
                 `py-3 px-4 mr-4 font-medium ${isActive ? 
-                  "border-b-2 border-black font-bold" : 
+                  "focus: font-bold focus:underline " : 
                   "text-gray-600 hover:text-black"}`
               }
             >
@@ -98,7 +98,7 @@ const HostVanDetail: React.FC = () => {
               to="photos"
               className={({ isActive }) => 
                 `py-3 px-4 mr-4 font-medium ${isActive ? 
-                  "border-b-2 border-black font-bold" : 
+                  "focus: font-bold focus:underline " : 
                   "text-gray-600 hover:text-black"}`
               }
             >
