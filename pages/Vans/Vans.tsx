@@ -121,7 +121,7 @@ export default function Vans(): React.ReactElement {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Explore our van options</h1>
+      <h1 className="text-3xl font-bold mb-6 font-serif">Explore our van options</h1>
       
       <div className="mb-6">
         <button

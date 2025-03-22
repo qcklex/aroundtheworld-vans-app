@@ -12,8 +12,8 @@ export default function Header() {
   }
 
   return (
-    <header className="flex justify-between items-center p-4 bg-white shadow-sm font-sans ">
-      <Link className="sm:text-3xl md:text-3xl  lg:text-4xl text-2xl text-gray-900 font-sans font-thin uppercase" to="/">
+    <header className="flex justify-between items-center p-4 bg-orange-500 shadow-sm font-serif ">
+      <Link className="sm:text-3xl md:text-3xl  lg:text-4xl text-2xl text-gray-900 font-serif font-thin lowercase" to="/">
         #AroundTheWorld
       </Link>
       <nav className="flex items-center gap-2 font-sans">

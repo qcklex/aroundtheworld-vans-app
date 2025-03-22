@@ -1,5 +1,6 @@
 import React from "react";
 import { BsStarFill } from "react-icons/bs";
+import reviewsGraph from '../../assets/images/reviews-graph.png';
 
 interface Review {
   rating: number;
@@ -38,7 +39,7 @@ const Reviews: React.FC = () => {
       
       <img
         className="w-full h-64 object-contain bg-white p-4 rounded-lg shadow-sm mb-8"
-        src="/assets/images/reviews-graph.png"
+        src={reviewsGraph}
         alt="Review graph"
       />
       
@@ -57,7 +58,7 @@ const Reviews: React.FC = () => {
                 <p className="font-medium">{review.name}</p>
                 <p>{review.date}</p>
               </div>
-              <p className="text-gray-800">{review.text}</p>
+              <p className="text-gray-800 font-sans font-thin">{review.text}</p>
             </div>
             {index < reviewsData.length - 1 && (
               <hr className="my-4 border-gray-200" />

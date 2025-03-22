@@ -1,4 +1,5 @@
 import React from "react";
+import incomeGraph from '../../assets/images/income-graph.png';
 
 interface Transaction {
   amount: number;
@@ -23,7 +24,7 @@ const Income: React.FC = () => {
       
       <img
         className="w-full h-64 object-contain bg-white p-4 rounded-lg shadow-sm mb-8"
-        src="/assets/images/income-graph.png"
+        src={incomeGraph}
         alt="Income graph"
       />
       

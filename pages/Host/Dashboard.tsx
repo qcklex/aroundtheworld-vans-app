@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="font-sans">
-      <section className="bg-orange-100 p-6 rounded-lg mb-6 flex justify-between items-center">
+      <section className="bg-orange-100 p-6 rounded-lg mb-6 flex justify-between items-center ">
         <div>
           <h1 className="text-3xl font-bold mb-2">Welcome!</h1>
           <p className="text-gray-600 mb-1">
